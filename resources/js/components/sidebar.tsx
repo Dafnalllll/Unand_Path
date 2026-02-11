@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Sidebar() {
     const { url } = usePage();
@@ -9,6 +9,14 @@ export default function Sidebar() {
     const [prestasiHover, setPrestasiHover] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mobilePrestasiOpen, setMobilePrestasiOpen] = useState(false);
+    const [showAos, setShowAos] = useState(true);
+
+    useEffect(() => {
+        if (showAos) {
+            const timer = setTimeout(() => setShowAos(false), 900); // lebih dari duration AOS
+            return () => clearTimeout(timer);
+        }
+    }, [showAos]);
 
     const menuItems = [
         {
@@ -162,10 +170,13 @@ export default function Sidebar() {
     // Sidebar Desktop
     const DesktopSidebar = (
         <aside
-            data-aos="fade-right"
-            data-aos-delay="50"
+            {...(showAos && {
+                'data-aos': 'fade-right',
+                'data-aos-delay': '50',
+            })}
             style={{ fontFamily: 'Inter, sans-serif' }}
             className={cn(
+                'z-10',
                 'hidden h-screen flex-col border-r border-gray-700 bg-gradient-to-b from-[#232946] via-[#1a1a2e] to-[#0f3460] shadow-xl transition-all duration-600 md:flex',
                 expanded ? 'w-56' : 'w-20',
             )}
