@@ -334,7 +334,14 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
       data-sidebar="header"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
-    />
+    >
+      {/* Tambahkan logo UnandPath */}
+      <img
+        src="/unand_path.webp"
+        alt="Unand Logo"
+        className="w-16 h-16 mx-auto" // Atur ukuran sesuai kebutuhan
+      />
+    </div>
   )
 }
 

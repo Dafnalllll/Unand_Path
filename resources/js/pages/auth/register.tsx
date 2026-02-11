@@ -5,16 +5,18 @@ import { Form, Head } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
+import Eye from '@/components/ui/eye';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
+import { router } from '@inertiajs/react'; // pastikan import router
 
 export default function Register() {
     return (
         <AuthLayout
-            title="Create an account"
-            description="Enter your details below to create your account"
+            title="Buat Akun Anda"
+            description="Masukkan detail Anda di bawah untuk membuat akun"
         >
             <Head title="Register" />
             <Form
@@ -22,12 +24,14 @@ export default function Register() {
                 resetOnSuccess={['password', 'password_confirmation']}
                 disableWhileProcessing
                 className="flex flex-col gap-6"
+                data-aos="fade-down"
+                onSuccess={() => router.visit('/login')} // Tambahkan ini
             >
                 {({ processing, errors }) => (
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">Nama</Label>
                                 <Input
                                     id="name"
                                     type="text"
@@ -36,7 +40,9 @@ export default function Register() {
                                     tabIndex={1}
                                     autoComplete="name"
                                     name="name"
-                                    placeholder="Full name"
+                                    placeholder="Nama Lengkap"
+                                    className="border-2 border-white text-white placeholder:text-gray-50"
+                                    data-aos="fade-down"
                                 />
                                 <InputError
                                     message={errors.name}
@@ -45,7 +51,7 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">Email</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -53,58 +59,72 @@ export default function Register() {
                                     tabIndex={2}
                                     autoComplete="email"
                                     name="email"
-                                    placeholder="email@example.com"
+                                    placeholder="email@contoh.com"
+                                    className="border-2 border-white text-white placeholder:text-gray-50"
+                                    data-aos="fade-down"
                                 />
                                 <InputError message={errors.email} />
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    required
-                                    tabIndex={3}
-                                    autoComplete="new-password"
-                                    name="password"
-                                    placeholder="Password"
-                                />
+                                <div className="relative">
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        required
+                                        tabIndex={3}
+                                        autoComplete="new-password"
+                                        name="password"
+                                        placeholder="Password"
+                                        className="border-2 border-white pr-10 text-white placeholder:text-gray-50"
+                                        data-aos="fade-down"
+                                    />
+                                    <Eye inputId="password" />
+                                </div>
                                 <InputError message={errors.password} />
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password_confirmation">
-                                    Confirm password
+                                    Konfirmasi password
                                 </Label>
-                                <Input
-                                    id="password_confirmation"
-                                    type="password"
-                                    required
-                                    tabIndex={4}
-                                    autoComplete="new-password"
-                                    name="password_confirmation"
-                                    placeholder="Confirm password"
-                                />
+                                <div className="relative">
+                                    <Input
+                                        id="password_confirmation"
+                                        type="password"
+                                        required
+                                        tabIndex={4}
+                                        autoComplete="new-password"
+                                        name="password_confirmation"
+                                        placeholder="Konfirmasi password"
+                                        className="border-2 border-white pr-10 text-white placeholder:text-gray-50"
+                                        data-aos="fade-down"
+                                    />
+                                    <Eye inputId="password_confirmation" />
+                                </div>
                                 <InputError
                                     message={errors.password_confirmation}
                                 />
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="mt-2 w-full"
-                                tabIndex={5}
-                                data-test="register-user-button"
-                            >
-                                {processing && <Spinner />}
-                                Create account
-                            </Button>
+                            <div data-aos="zoom-in" data-aos-delay="200">
+                                <Button
+                                    type="submit"
+                                    className="mt-4 w-full cursor-pointer transition-transform duration-200 hover:scale-105"
+                                    tabIndex={5}
+                                    data-test="register-user-button"
+                                >
+                                    {processing && <Spinner />}
+                                    Daftar
+                                </Button>
+                            </div>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
+                            Sudah punya akun?{' '}
                             <TextLink href={login()} tabIndex={6}>
-                                Log in
+                                Login
                             </TextLink>
                         </div>
                     </>

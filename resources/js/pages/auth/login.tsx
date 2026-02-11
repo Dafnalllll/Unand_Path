@@ -2,6 +2,7 @@ import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import Eye from '@/components/ui/eye';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
@@ -24,21 +25,22 @@ export default function Login({
 }: LoginProps) {
     return (
         <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
+            title="Login Akun Anda"
+            description="Masukkan email dan kata sandi Anda di bawah ini untuk masuk"
         >
-            <Head title="Log in" />
+            <Head title="Login" />
 
             <Form
                 {...store.form()}
                 resetOnSuccess={['password']}
                 className="flex flex-col gap-6"
+                data-aos="fade-down"
             >
                 {({ processing, errors }) => (
                     <>
                         <div className="grid gap-6">
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                            <div className="grid gap-2" data-aos="fade-down">
+                                <Label htmlFor="email">Email</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -47,12 +49,14 @@ export default function Login({
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="email"
-                                    placeholder="email@example.com"
+                                    placeholder="email@contoh.com"
+                                    className="border-2 border-white text-white placeholder:text-gray-50"
+                                    data-aos="fade-down"
                                 />
                                 <InputError message={errors.email} />
                             </div>
 
-                            <div className="grid gap-2">
+                            <div className="grid gap-2" data-aos="fade-down">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
                                     {canResetPassword && (
@@ -60,49 +64,64 @@ export default function Login({
                                             href={request()}
                                             className="ml-auto text-sm"
                                             tabIndex={5}
+                                            data-aos="fade-down"
                                         >
-                                            Forgot password?
+                                            Lupa kata password?
                                         </TextLink>
                                     )}
                                 </div>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    required
-                                    tabIndex={2}
-                                    autoComplete="current-password"
-                                    placeholder="Password"
-                                />
+                                <div className="relative">
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        required
+                                        tabIndex={2}
+                                        autoComplete="current-password"
+                                        placeholder="Password"
+                                        className="border-2 border-white pr-10 text-white placeholder:text-gray-50"
+                                        data-aos="fade-down"
+                                    />
+                                    <Eye inputId="password" />
+                                </div>
                                 <InputError message={errors.password} />
                             </div>
 
-                            <div className="flex items-center space-x-3">
+                            <div
+                                className="flex items-center space-x-3"
+                                data-aos="fade-down"
+                            >
                                 <Checkbox
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
+                                    data-aos="fade-down"
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">Ingat saya</Label>
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="mt-4 w-full"
-                                tabIndex={4}
-                                disabled={processing}
-                                data-test="login-button"
-                            >
-                                {processing && <Spinner />}
-                                Log in
-                            </Button>
+                            <div data-aos="zoom-in" data-aos-delay="200">
+                                <Button
+                                    type="submit"
+                                    className="mt-4 w-full cursor-pointer transition-transform duration-200 hover:scale-105"
+                                    tabIndex={4}
+                                    disabled={processing}
+                                    data-test="login-button"
+                                >
+                                    {processing && <Spinner />}
+                                    Login
+                                </Button>
+                            </div>
                         </div>
 
                         {canRegister && (
-                            <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
+                            <div
+                                className="text-center text-sm text-muted-foreground"
+                                data-aos="fade-down"
+                            >
+                                Belum punya akun?{' '}
                                 <TextLink href={register()} tabIndex={5}>
-                                    Sign up
+                                    Daftar
                                 </TextLink>
                             </div>
                         )}
@@ -111,7 +130,10 @@ export default function Login({
             </Form>
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                <div
+                    className="mb-4 text-center text-sm font-medium text-green-600"
+                    data-aos="fade-down"
+                >
                     {status}
                 </div>
             )}
