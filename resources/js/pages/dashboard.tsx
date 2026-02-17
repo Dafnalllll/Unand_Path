@@ -17,7 +17,7 @@ export default function Dashboard() {
     const stats = [
         {
             label: 'verifikasi',
-            value: 87,
+            value: 89,
             icon: '✅',
             color: 'from-green-400 to-green-600',
             iconBg: 'bg-gradient-to-br from-green-300 to-green-600',
