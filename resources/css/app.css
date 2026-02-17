@@ -161,3 +161,50 @@
     transform: rotateY(180deg);
 }
 
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.floating {
+    animation: float 2.4s ease-in-out infinite;
+}
+
+@keyframes move-stripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 0;
+    }
+}
+
+.animated-stripes {
+    background-image: repeating-linear-gradient(
+        135deg,
+        #ffb347 0 20px,
+        #ff7f50 20px 40px
+    );
+    animation: move-stripes 1.2s linear infinite;
+    background-size: 40px 40px;
+}
+
+@layer utilities {
+    @media (min-width: 768px) {
+        .sidebar-expanded .dashboard-content {
+            padding-left: 14rem !important; /* w-56 */
+            transition: padding-left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dashboard-content {
+            padding-left: 5rem !important; /* w-20 */
+            transition: padding-left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    }
+}

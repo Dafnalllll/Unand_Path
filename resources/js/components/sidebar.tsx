@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Link, usePage } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Sidebar() {
     const { url } = usePage();
@@ -17,6 +17,14 @@ export default function Sidebar() {
             return () => clearTimeout(timer);
         }
     }, [showAos]);
+
+    useEffect(() => {
+        if (expanded) {
+            document.body.classList.add('sidebar-expanded');
+        } else {
+            document.body.classList.remove('sidebar-expanded');
+        }
+    }, [expanded]);
 
     const menuItems = [
         {
@@ -176,8 +184,7 @@ export default function Sidebar() {
             })}
             style={{ fontFamily: 'Inter, sans-serif' }}
             className={cn(
-                'z-10',
-                'hidden h-screen flex-col border-r border-gray-700 bg-gradient-to-b from-[#232946] via-[#1a1a2e] to-[#0f3460] shadow-xl transition-all duration-600 md:flex',
+                'fixed top-0 left-0 z-10 hidden h-screen flex-col border-r border-gray-700 bg-gradient-to-b from-[#232946] via-[#1a1a2e] to-[#0f3460] shadow-xl transition-all duration-600 md:flex',
                 expanded ? 'w-56' : 'w-20',
             )}
             onMouseEnter={() => setExpanded(true)}

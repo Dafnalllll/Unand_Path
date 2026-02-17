@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Fallback route untuk halaman tidak ditemukan
 Route::fallback(function () {
     return Inertia::render('notfound', [
-        'isLoggedIn' => auth()->check(),
+        'isLoggedIn' => Auth::check(),
     ]);
 });
 
