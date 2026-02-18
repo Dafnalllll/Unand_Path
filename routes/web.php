@@ -32,11 +32,11 @@ Route::post('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect('/login');
+    return redirect()->route('home');
 })->name('logout');
 
 Route::post('/register', function (Request $request) {
     app(CreateNewUser::class)->create($request->all());
     return redirect('/login');
-})->middleware(['guest']);
+})->middleware(['guest'])->name('register.store');
 
