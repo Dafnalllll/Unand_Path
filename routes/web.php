@@ -37,6 +37,7 @@ Route::post('/logout', function (Request $request) {
 
 Route::post('/register', function (Request $request) {
     app(CreateNewUser::class)->create($request->all());
-    return redirect('/login');
+    // Tidak perlu Auth::login($user)
+    return redirect('/login'); // Arahkan ke halaman login
 })->middleware(['guest'])->name('register.store');
 
