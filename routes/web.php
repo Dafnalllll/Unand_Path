@@ -37,7 +37,6 @@ Route::post('/logout', function (Request $request) {
 
 Route::post('/register', function (Request $request) {
     app(CreateNewUser::class)->create($request->all());
-    // Tidak login user di sini!
     return redirect('/login');
 })->middleware(['guest']);
 

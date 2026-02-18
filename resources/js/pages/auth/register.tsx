@@ -8,7 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
-import { router } from '@inertiajs/react'; // pastikan import router
+import { router } from '@inertiajs/react';
+import { store } from '@/routes/register';
 
 export default function Register() {
     return (
@@ -18,11 +19,12 @@ export default function Register() {
         >
             <Head title="Register" />
             <Form
+                {...store.form()}
                 resetOnSuccess={['password', 'password_confirmation']}
                 disableWhileProcessing
                 className="flex flex-col gap-6"
                 data-aos="fade-down"
-                onSuccess={() => router.visit('/login')} // Tambahkan ini
+                onSuccess={() => router.visit('/login')}
             >
                 {({ processing, errors }) => (
                     <>
