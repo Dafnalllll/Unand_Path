@@ -3,7 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 
-export default function NotFound(props: { isLoggedIn?: boolean }) {
+export default function NotFound() {
     useEffect(() => {
         AOS.init();
     }, []);
